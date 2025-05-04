@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 const AddProductPage = () => {
     const navigate = useNavigate();
     const [product, setProduct] = useState({ product_barcode: '', product_brand: '', product_name: '', product_description: '' });
+    const [errors, setErrors] = useState({});
 
     const onInputFieldChanged = (e) => {
         const { name, value } = e.target;
@@ -12,7 +13,20 @@ const AddProductPage = () => {
 
     const onSubmitBtnClicked = (e) => {
         e.preventDefault();
+        if (!checkFormValidation()) return;
+
         console.log(product);
+
+        alert("Added successfully.");
+    };
+
+    const checkFormValidation = () => {
+        const errs = {};
+        if (!/^[0-9]{12}$/.test(product.product_barcode)) errs.product_barcode = 'UPC12 Barcode must be 12 digits';
+        if (!product.product_brand.trim()) errs.product_brand = 'Brand is required';
+        if (!product.product_name.trim()) errs.product_name = 'Name is required';
+        setErrors(errs);
+        return Object.keys(errs).length === 0;
     };
 
     return (
@@ -22,14 +36,17 @@ const AddProductPage = () => {
                 <div>
                     <label>UPC12 Barcode:</label>
                     <input name="product_barcode" value={product.product_barcode} onChange={onInputFieldChanged} />
+                    {errors.product_barcode && <div style={{ color: 'red', fontSize:12 }}>{errors.product_barcode}</div>}
                 </div>
                 <div>
                     <label>Product Brand:</label>
                     <input name="product_brand" value={product.product_brand} onChange={onInputFieldChanged} />
+                    {errors.product_brand && <div style={{ color: 'red', fontSize:12 }}>{errors.product_brand}</div>}
                 </div>
                 <div>
                     <label>Product Name:</label>
                     <input name="product_name" value={product.product_name} onChange={onInputFieldChanged} />
+                    {errors.product_name && <div style={{ color: 'red', fontSize:12 }}>{errors.product_name}</div>}
                 </div>
                 <div>
                     <label>Product Description:</label>
