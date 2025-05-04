@@ -11,7 +11,7 @@ const ProductsPage = () => {
   const [products, setProducts] = useState([]);
   const [searchText, setSearchText] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const [sortField, setSortField] = useState('name');
+  const [sortField, setSortField] = useState('product_name');
   const [sortOrder, setSortOrder] = useState('asc');
   const [itemsPerPage, setItemsPerPage] = useState(20);
   const [totalPages, setTotalPages] = useState(1);
@@ -90,8 +90,8 @@ const ProductsPage = () => {
       <div>
         <label>Sort by: </label>
         <select onChange={(e) => onSortChanged(e.target.value, sortOrder)} value={sortField}>
-          <option value="brand">Brand</option>
-          <option value="name">Name</option>
+          <option value="product_brand">Brand</option>
+          <option value="product_name">Name</option>
         </select>
         <select onChange={(e) => onSortChanged(sortField, e.target.value)} value={sortOrder}>
           <option value="asc">Asc</option>
