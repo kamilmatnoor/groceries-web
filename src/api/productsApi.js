@@ -11,5 +11,6 @@ const productsMock = {
 export default productsMock;
 
 export async function addProduct(product) {
-    return products[0];
+    console.log(product);
+    return productsMock.products[0];
 }
