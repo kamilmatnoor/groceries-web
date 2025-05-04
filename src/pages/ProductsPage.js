@@ -16,23 +16,24 @@ const ProductsPage = () => {
   const [itemsPerPage, setItemsPerPage] = useState(20);
   const [totalPages, setTotalPages] = useState(1);
 
-  const fetchProducts = useCallback(async () => {
+  const fetchProducts = useCallback(async (searchParam) => {
     try {
-      const allProducts = await getProducts({ searchText, currentPage });
+      const allProducts = await getProducts({ searchText:searchParam, currentPage, sortField, sortOrder, itemsPerPage });
       const tempTotalPages = Math.ceil(allProducts.length / itemsPerPage);
       setProducts(allProducts);
       setTotalPages(tempTotalPages);
     } catch (error) {
       setProducts([]);
     }
-  }, [searchText, currentPage]);
+  }, [currentPage, sortField, sortOrder, itemsPerPage]);
 
   useEffect(() => {
-    fetchProducts();
-  }, [searchText, currentPage]);
+    fetchProducts(searchText);
+  }, [fetchProducts]);
 
   const onSearchBtnClicked = () => {
     setCurrentPage(1);
+    fetchProducts(searchText);
   };
 
   const onDeleteProduct = async (id) => {

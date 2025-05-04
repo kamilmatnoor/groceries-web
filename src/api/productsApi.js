@@ -18,7 +18,9 @@ export async function addProduct(product) {
 }
 
 export async function getProducts(options) {
-    const response = await http.get('/products');
+    const response = await http.get('/products', {
+        params: options,
+    });
     return response.data.data;
 }
 
