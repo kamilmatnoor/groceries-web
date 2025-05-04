@@ -7,23 +7,35 @@ const ProductsPage = () => {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [searchText, setSearchText] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
 
   const fetchProducts = useCallback(async () => {
     try {
-      const allProducts = await getProducts({ searchText });
+      const allProducts = await getProducts({ searchText, currentPage });
       setProducts(allProducts);
     } catch (error) {
       setProducts([]);
     }
-  }, [searchText]);
+  }, [searchText, currentPage]);
 
   useEffect(() => {
     fetchProducts();
-  }, [searchText]);
+  }, [searchText, currentPage]);
+
+  const onSearchBtnClicked = () => {
+    setCurrentPage(1);
+  };
 
   return (
     <div style={{ padding: '20px' }}>
       <h2>Products</h2>
+      <input
+        type="text"
+        placeholder="Search by Product Name or Brand"
+        value={searchText}
+        onChange={(e) => setSearchText(e.target.value)}
+      />
+      <button onClick={onSearchBtnClicked}>Search</button>
       <button onClick={() => navigate('/add')}>Add New</button>
       <ul>
         {products.map(p => (
