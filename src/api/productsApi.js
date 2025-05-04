@@ -16,3 +16,8 @@ export async function addProduct(product) {
     const response = await http.post(`/products`, product);
     return response.data.data;
 }
+
+export async function getProducts(options) {
+    const response = await http.get('/products');
+    return response.data.data;
+}
