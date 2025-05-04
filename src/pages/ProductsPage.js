@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { getProducts } from "../api/productsApi";
+import { getProducts, deleteProduct } from "../api/productsApi";
+
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
 const ProductsPage = () => {
   const navigate = useNavigate();
@@ -26,6 +29,28 @@ const ProductsPage = () => {
     setCurrentPage(1);
   };
 
+  const onDeleteProduct = async (id) => {
+    const MySwal = withReactContent(Swal)
+
+    MySwal.fire({
+      icon: "warning",
+      title: <p>Warning</p>,
+      text: "Are you sure you want to delete this product?",
+      confirmButtonText: "Proceed",
+      showCancelButton: true,
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await deleteProduct(id);
+          fetchProducts();
+          MySwal.fire("Success", "Deleted successfully.", "");
+        } catch (error) {
+          MySwal.fire("Error", "Failed deleting product.", "");
+        }
+      }
+    });
+  };
+
   return (
     <div style={{ padding: '20px' }}>
       <h2>Products</h2>
@@ -39,13 +64,13 @@ const ProductsPage = () => {
       <button onClick={() => navigate('/add')}>Add New</button>
       <ul>
         {products.map(p => (
-          <li key={p.id} style={{ margin: '10px 0', borderBottom: '1px solid #ccc', paddingBottom: '5px' }}>
+          <li key={p._id} style={{ margin: '10px 0', borderBottom: '1px solid #ccc', paddingBottom: '5px' }}>
             <div>UPC12 Barcode: {p.product_barcode}</div>
             <div>Brand: {p.product_brand}</div>
             <div>Name: {p.product_name}</div>
             <div>Description: {p.product_description}</div>
             <button>Edit</button>
-            <button>Delete</button>
+            <button onClick={() => onDeleteProduct(p._id)}>Delete</button>
           </li>
         ))}
       </ul>

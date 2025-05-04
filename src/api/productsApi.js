@@ -21,3 +21,8 @@ export async function getProducts(options) {
     const response = await http.get('/products');
     return response.data.data;
 }
+
+export async function deleteProduct(id) {
+    const response = await http.delete(`/products/${id}`);
+    return response.data.data;
+}
