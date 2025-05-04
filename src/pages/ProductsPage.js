@@ -13,11 +13,15 @@ const ProductsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [sortField, setSortField] = useState('name');
   const [sortOrder, setSortOrder] = useState('asc');
+  const [itemsPerPage, setItemsPerPage] = useState(20);
+  const [totalPages, setTotalPages] = useState(1);
 
   const fetchProducts = useCallback(async () => {
     try {
       const allProducts = await getProducts({ searchText, currentPage });
+      const tempTotalPages = Math.ceil(allProducts.length / itemsPerPage);
       setProducts(allProducts);
+      setTotalPages(tempTotalPages);
     } catch (error) {
       setProducts([]);
     }
@@ -59,6 +63,11 @@ const ProductsPage = () => {
     setCurrentPage(1);
   };
 
+  const onPageSizeChanged = (e) => {
+    setItemsPerPage(Number(e.target.value));
+    setCurrentPage(1);
+  };
+
   return (
     <div style={{ padding: '20px' }}>
       <h2>Products</h2>
@@ -69,7 +78,7 @@ const ProductsPage = () => {
         onChange={(e) => setSearchText(e.target.value)}
       />
       <button onClick={onSearchBtnClicked}>Search</button>
-      <button onClick={() => navigate('/add')}>Add New</button>
+      <button onClick={() => navigate('/add')}>Add</button>
       <div>
         <label>Sort by: </label>
         <select onChange={(e) => onSortChanged(e.target.value, sortOrder)} value={sortField}>
@@ -80,6 +89,19 @@ const ProductsPage = () => {
           <option value="asc">Asc</option>
           <option value="desc">Desc</option>
         </select>
+        <label style={{ marginLeft: '20px' }}>Page Size: </label>
+        <select value={itemsPerPage} onChange={onPageSizeChanged}>
+          <option value={10}>10</option>
+          <option value={20}>20</option>
+          <option value={50}>50</option>
+        </select>
+        <button onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))} disabled={currentPage === 1}>
+          Previous
+        </button>
+        <span style={{ margin: '0 10px' }}>Page {currentPage} of {totalPages}</span>
+        <button onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))} disabled={currentPage === totalPages}>
+          Next
+        </button>
       </div>
       <ul>
         {products.map(p => (
