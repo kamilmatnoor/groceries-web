@@ -36,6 +36,12 @@ const ProductsPage = () => {
     fetchProducts(searchText);
   };
 
+  const onResetBtnClicked = () => {
+    setSearchText('');
+    setCurrentPage(1);
+    fetchProducts('');
+  };
+
   const onDeleteProduct = async (id) => {
     const MySwal = withReactContent(Swal)
 
@@ -79,6 +85,7 @@ const ProductsPage = () => {
         onChange={(e) => setSearchText(e.target.value)}
       />
       <button onClick={onSearchBtnClicked}>Search</button>
+      <button onClick={onResetBtnClicked}>Reset</button>
       <button onClick={() => navigate('/add')}>Add</button>
       <div>
         <label>Sort by: </label>
