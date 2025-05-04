@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const AddProductPage = () => {
@@ -10,10 +10,15 @@ const AddProductPage = () => {
         setProduct(prev => ({ ...prev, [name]: value }));
     };
 
+    const onSubmitBtnClicked = (e) => {
+        e.preventDefault();
+        console.log(product);
+    };
+
     return (
         <div style={{ padding: '20px' }}>
             <h2>New Product</h2>
-            <form>
+            <form onSubmit={onSubmitBtnClicked}>
                 <div>
                     <label>UPC12 Barcode:</label>
                     <input name="product_barcode" value={product.product_barcode} onChange={onInputFieldChanged} />
