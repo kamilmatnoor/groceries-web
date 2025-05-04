@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const productsMockApi = {
   products: Array.from({ length: 100 }, (_, i) => ({
@@ -11,9 +12,11 @@ const productsMockApi = {
 };
 
 const ProductsPage = () => {
+  const navigate = useNavigate();
   return (
     <div style={{ padding: '20px' }}>
       <h2>Products</h2>
+      <button onClick={() => navigate('/add')}>Add New</button>
       <ul>
         {productsMockApi.products.map(p => (
           <li key={p.id} style={{ margin: '10px 0', borderBottom: '1px solid #ccc', paddingBottom: '5px' }}>
