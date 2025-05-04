@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { addProduct } from '../api/productsApi';
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { updateProduct, getProductById } from '../api/productsApi';
 
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
@@ -9,6 +9,17 @@ const EditProductPage = () => {
     const navigate = useNavigate();
     const [product, setProduct] = useState({ product_barcode: '', product_brand: '', product_name: '', product_description: '' });
     const [errors, setErrors] = useState({});
+    const { id } = useParams();
+    const MySwal = withReactContent(Swal)
+
+    useEffect(() => {
+        getProductById(id)
+            .then(data => setProduct(data))
+            .catch(error => {
+                MySwal.fire("Error", "Failed to get product details. Please try again.", "");
+                navigate('/');
+            });
+    }, [id]);
 
     const onInputFieldChanged = (e) => {
         const { name, value } = e.target;
@@ -18,15 +29,13 @@ const EditProductPage = () => {
     const onSubmitBtnClicked = async (e) => {
         e.preventDefault();
         if (!checkFormValidation()) return;
-
-        const MySwal = withReactContent(Swal)
         try {
-            const response = await addProduct(product);
+            const response = await updateProduct(id, product);
             navigate('/');
-            MySwal.fire("Success", "New Product added successfully.", "");
+            MySwal.fire("Success", "Product updated successfully.", "");
         } catch (error) {
             navigate('/');
-            MySwal.fire("Error", "Failed to add new product. Please try again.", "");
+            MySwal.fire("Error", "Failed to update product. Please try again.", "");
         }
     };
 

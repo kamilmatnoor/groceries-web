@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 import { getProducts, deleteProduct } from "../api/productsApi";
 
@@ -69,7 +69,7 @@ const ProductsPage = () => {
             <div>Brand: {p.product_brand}</div>
             <div>Name: {p.product_name}</div>
             <div>Description: {p.product_description}</div>
-            <button>Edit</button>
+            <Link to={`/edit/${p._id}`}><button>Edit</button></Link>
             <button onClick={() => onDeleteProduct(p._id)}>Delete</button>
           </li>
         ))}

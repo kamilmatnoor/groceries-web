@@ -22,6 +22,16 @@ export async function getProducts(options) {
     return response.data.data;
 }
 
+export async function getProductById(id) {
+    const response = await http.get(`/products/${id}`);
+    return response.data.data;
+}
+
+export async function updateProduct(id, product) {
+    const response = await http.put(`/products/${id}`, product);
+    return response.data.data;
+}
+
 export async function deleteProduct(id) {
     const response = await http.delete(`/products/${id}`);
     return response.data.data;
