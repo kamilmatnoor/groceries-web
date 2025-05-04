@@ -1,3 +1,5 @@
+import http from '../api/http'
+
 const productsMock = {
     products: Array.from({ length: 100 }, (_, i) => ({
         id: String(i + 1),
@@ -11,6 +13,6 @@ const productsMock = {
 export default productsMock;
 
 export async function addProduct(product) {
-    console.log(product);
-    return productsMock.products[0];
+    const response = await http.post(`/products`, product);
+    return response.data.data;
 }
