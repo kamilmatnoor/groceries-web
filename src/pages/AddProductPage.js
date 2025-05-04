@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { addProduct } from '../api/productsApi';
 
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
 const AddProductPage = () => {
     const navigate = useNavigate();
     const [product, setProduct] = useState({ product_barcode: '', product_brand: '', product_name: '', product_description: '' });
@@ -16,12 +19,14 @@ const AddProductPage = () => {
         e.preventDefault();
         if (!checkFormValidation()) return;
 
+        const MySwal = withReactContent(Swal)
         try {
             const response = await addProduct(product);
-            console.log(response);
-            alert("Added successfully.");
+            navigate('/');
+            MySwal.fire("Success", "New Product added successfully.", "");
         } catch (error) {
-            alert("Failed to add new product. Please try again.");
+            navigate('/');
+            MySwal.fire("Error", "Failed to add new product. Please try again.", "");
         }
     };
 
@@ -57,7 +62,7 @@ const AddProductPage = () => {
                     <label>Product Description:</label>
                     <input name="product_description" value={product.product_description} onChange={onInputFieldChanged} />
                 </div>
-                <button onClick={() => navigate('/')}>Back</button>
+                <button type="button" onClick={() => navigate('/')}>Back</button>
                 <button type="submit">Submit</button>
             </form>
         </div>
