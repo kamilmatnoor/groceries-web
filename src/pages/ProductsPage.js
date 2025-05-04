@@ -11,6 +11,8 @@ const ProductsPage = () => {
   const [products, setProducts] = useState([]);
   const [searchText, setSearchText] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
+  const [sortField, setSortField] = useState('name');
+  const [sortOrder, setSortOrder] = useState('asc');
 
   const fetchProducts = useCallback(async () => {
     try {
@@ -51,6 +53,12 @@ const ProductsPage = () => {
     });
   };
 
+  const onSortChanged = (field, order) => {
+    setSortField(field);
+    setSortOrder(order);
+    setCurrentPage(1);
+  };
+
   return (
     <div style={{ padding: '20px' }}>
       <h2>Products</h2>
@@ -62,6 +70,17 @@ const ProductsPage = () => {
       />
       <button onClick={onSearchBtnClicked}>Search</button>
       <button onClick={() => navigate('/add')}>Add New</button>
+      <div>
+        <label>Sort by: </label>
+        <select onChange={(e) => onSortChanged(e.target.value, sortOrder)} value={sortField}>
+          <option value="brand">Brand</option>
+          <option value="name">Name</option>
+        </select>
+        <select onChange={(e) => onSortChanged(sortField, e.target.value)} value={sortOrder}>
+          <option value="asc">Asc</option>
+          <option value="desc">Desc</option>
+        </select>
+      </div>
       <ul>
         {products.map(p => (
           <li key={p._id} style={{ margin: '10px 0', borderBottom: '1px solid #ccc', paddingBottom: '5px' }}>
