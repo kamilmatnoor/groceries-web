@@ -20,9 +20,9 @@ const ProductsPage = () => {
 
   const fetchProducts = useCallback(async (searchParam) => {
     try {
-      const allProducts = await getProducts({ searchText: searchParam, currentPage, sortField, sortOrder, itemsPerPage });
-      const tempTotalPages = Math.ceil(allProducts.length / itemsPerPage);
-      setProducts(allProducts);
+      const responseProducts = await getProducts({ searchText: searchParam, currentPage, sortField, sortOrder, itemsPerPage });
+      const tempTotalPages = Math.ceil(responseProducts.totals / itemsPerPage);
+      setProducts(responseProducts.products);
       setTotalPages(tempTotalPages);
     } catch (error) {
       setProducts([]);
