@@ -6,6 +6,8 @@ import { getProducts, deleteProduct } from "../api/productsApi";
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
+import image from '../assets/images/image-1.jpg';
+
 const ProductsPage = () => {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
@@ -111,7 +113,7 @@ const ProductsPage = () => {
         </button>
       </div>
 
-      <div className="flex flex-wrap gap-2 w-full sm:w-auto items-center">
+      <div className="flex flex-wrap mb-4 gap-2 w-full sm:w-auto items-center">
         <label className="text-sm font-medium text-gray-900 dark:text-white">Sort by:</label>
         <select
           onChange={(e) => onSortChanged(e.target.value, sortOrder)}
@@ -162,18 +164,33 @@ const ProductsPage = () => {
           Next &gt;
         </button>
       </div>
-      <ul>
-        {products.map(p => (
-          <li key={p._id} style={{ margin: '10px 0', borderBottom: '1px solid #ccc', paddingBottom: '5px' }}>
-            <div>UPC12 Barcode: {p.product_barcode}</div>
-            <div>Brand: {p.product_brand}</div>
-            <div>Name: {p.product_name}</div>
-            <div>Description: {p.product_description}</div>
-            <Link to={`/edit/${p._id}`}><button>Edit</button></Link>
-            <button onClick={() => onDeleteProduct(p._id)}>Delete</button>
-          </li>
+      <div className="flex flex-wrap gap-4">
+        {products.map((product, index) => (
+          <div key={index} className="max-w-64 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+            <a href="#">
+              <img className="rounded-t-lg w-full" src={image} alt="{product.name}" />
+            </a>
+            <div className="p-5">
+              <p className="text-sm font-thin text-gray-700 dark:text-gray-400">Product</p>
+              <p className="mb-2 text-sm text-gray-800 dark:text-gray-400">{product.product_name}</p>
+
+              <p className="text-sm font-thin text-gray-700 dark:text-gray-400">Brand</p>
+              <p className="mb-2 text-sm text-gray-800 dark:text-gray-400">{product.product_brand}</p>
+
+              <p className="text-sm font-thin text-gray-700 dark:text-gray-400">Barcode</p>
+              <p className="mb-2 text-sm text-gray-800 dark:text-gray-400">{product.product_barcode}</p>
+
+              <p className="text-sm font-thin text-gray-700 dark:text-gray-400">Description</p>
+              <p className="mb-2 text-sm text-gray-800 dark:text-gray-400">{product.product_description}</p>
+
+              <div className="flex justify-end space-x-2 mt-4">
+                <Link to={`/edit/${product._id}`}><button className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded">Edit</button></Link>
+                <button className="bg-gray-500 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded" onClick={() => onDeleteProduct(product._id)}>Delete</button>
+              </div>
+            </div>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
