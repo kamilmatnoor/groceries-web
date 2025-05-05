@@ -91,7 +91,9 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 </div>
 
 <br />
-### Success message after add/update/delete
+
+### Success message after Add, Update, Delete operation
+
 <br />
 <div align="center">
   <a href="https://github.com/kamilmatnoor/groceries-web">
