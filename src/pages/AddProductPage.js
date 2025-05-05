@@ -23,12 +23,17 @@ const AddProductPage = () => {
         if (!checkFormValidation()) return;
 
         const MySwal = withReactContent(Swal)
+
         try {
-            await addProduct(product);
-            navigate('/');
-            MySwal.fire("Success", "New Product added successfully.", "");
+            const response = await addProduct(product);
+            if (response.error) {
+                MySwal.fire("Error", "Failed to add new product. Please try again.", "");
+            } else {
+                navigate('/');
+                MySwal.fire("Success", "New Product added successfully.", "");
+            }
+
         } catch (error) {
-            navigate('/');
             MySwal.fire("Error", "Failed to add new product. Please try again.", "");
         }
     };

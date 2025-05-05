@@ -17,7 +17,14 @@ const EditProductPage = () => {
 
     useEffect(() => {
         getProductById(id)
-            .then(data => setProduct(data))
+            .then(data => {
+                if (data.error) {
+                    navigate('/');
+                    MySwal.fire("Error", "Failed to get product details. Please try again.", "");
+                } else {
+                    setProduct(data.products)
+                }
+            })
             .catch(error => {
                 MySwal.fire("Error", "Failed to get product details. Please try again.", "");
                 navigate('/');
@@ -43,13 +50,19 @@ const EditProductPage = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    await updateProduct(id, product);
-                    navigate('/');
-                    MySwal.fire("Success", "Product updated successfully.", "");
+                    const response = await updateProduct(id, product);
+                    if (response.error) {
+                        MySwal.fire("Error", "Failed to update product. Please try again.", "");
+                    } else {
+                        navigate('/');
+                        MySwal.fire("Success", "Product updated successfully.", "");
+                    }
+
                 } catch (error) {
                     MySwal.fire("Error", "Failed to update product. Please try again.", "");
                 }
             }
+
         });
     };
 

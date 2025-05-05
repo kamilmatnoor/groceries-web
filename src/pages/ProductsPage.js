@@ -25,11 +25,16 @@ const ProductsPage = () => {
   const fetchProducts = useCallback(async (searchParam) => {
     try {
       const responseProducts = await getProducts({ searchText: searchParam, currentPage, sortField, sortOrder, itemsPerPage });
-      const tempTotalPages = Math.ceil(responseProducts.totals / itemsPerPage);
       setProducts(responseProducts.products);
+      if (responseProducts.error) {
+        setTotalPages(1);
+        return;
+      }
+      const tempTotalPages = Math.ceil(responseProducts.totals / itemsPerPage);
       setTotalPages(tempTotalPages);
     } catch (error) {
       setProducts([]);
+      setTotalPages(1);
     }
   }, [currentPage, sortField, sortOrder, itemsPerPage]);
 
@@ -61,11 +66,16 @@ const ProductsPage = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await deleteProduct(id);
-          fetchProducts();
-          MySwal.fire("Success", "Deleted successfully.", "");
+          const response = await deleteProduct(id);
+          if (response.error) {
+            MySwal.fire("Error", "Failed deleting product. Please try again.", "");
+          } else {
+            fetchProducts();
+            MySwal.fire("Success", "Deleted successfully.", "");
+          }
+
         } catch (error) {
-          MySwal.fire("Error", "Failed deleting product.", "");
+          MySwal.fire("Error", "Failed deleting product. Please try again.", "");
         }
       }
     });
@@ -160,32 +170,38 @@ const ProductsPage = () => {
           Next &gt;
         </ButtonWidget>
       </div>
-      <div className="flex flex-wrap gap-4">
-        {products.map((product, index) => (
-          <div key={index} className="max-w-64 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
-            <img className="rounded-t-lg w-full" src={imageDefault} alt="{product.name}" />
-            <div className="p-5">
-              <p className="text-sm font-thin text-gray-700 dark:text-gray-400">Product</p>
-              <p className="mb-2 text-sm text-gray-800 dark:text-gray-400">{product.product_name}</p>
+      <div>
+        {products.length === 0 ? (
+          <p className="text-center mt-40 text-gray-400 dark:text-gray-300 text-2xl">No available products.</p>
+        ) : (
+          <div className="flex flex-wrap gap-4">
+            {products.map((product, index) => (
+              <div key={index} className="max-w-64 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+                <img className="rounded-t-lg w-full" src={imageDefault} alt="{product.name}" />
+                <div className="p-5">
+                  <p className="text-sm font-thin text-gray-700 dark:text-gray-400">Product</p>
+                  <p className="mb-2 text-sm text-gray-800 dark:text-gray-400">{product.product_name}</p>
 
-              <p className="text-sm font-thin text-gray-700 dark:text-gray-400">Brand</p>
-              <p className="mb-2 text-sm text-gray-800 dark:text-gray-400">{product.product_brand}</p>
+                  <p className="text-sm font-thin text-gray-700 dark:text-gray-400">Brand</p>
+                  <p className="mb-2 text-sm text-gray-800 dark:text-gray-400">{product.product_brand}</p>
 
-              <p className="text-sm font-thin text-gray-700 dark:text-gray-400">Barcode</p>
-              <p className="mb-2 text-sm text-gray-800 dark:text-gray-400">{product.product_barcode}</p>
+                  <p className="text-sm font-thin text-gray-700 dark:text-gray-400">Barcode</p>
+                  <p className="mb-2 text-sm text-gray-800 dark:text-gray-400">{product.product_barcode}</p>
 
-              <p className="text-sm font-thin text-gray-700 dark:text-gray-400">Description</p>
-              <p className="mb-2 text-sm text-gray-800 dark:text-gray-400">{product.product_description}</p>
+                  <p className="text-sm font-thin text-gray-700 dark:text-gray-400">Description</p>
+                  <p className="mb-2 text-sm text-gray-800 dark:text-gray-400">{product.product_description}</p>
 
-              <div className="flex justify-end space-x-2 mt-4">
-                <Link to={`/edit/${product._id}`}>
-                  <ButtonWidget className="bg-blue-500 hover:bg-blue-600 text-white">Edit</ButtonWidget>
-                </Link>
-                <ButtonWidget className="bg-gray-500 hover:bg-gray-600 text-white" onClick={() => onDeleteProduct(product._id)}>Delete</ButtonWidget>
+                  <div className="flex justify-end space-x-2 mt-4">
+                    <Link to={`/edit/${product._id}`}>
+                      <ButtonWidget className="bg-blue-500 hover:bg-blue-600 text-white">Edit</ButtonWidget>
+                    </Link>
+                    <ButtonWidget className="bg-gray-500 hover:bg-gray-600 text-white" onClick={() => onDeleteProduct(product._id)}>Delete</ButtonWidget>
+                  </div>
+                </div>
               </div>
-            </div>
+            ))}
           </div>
-        ))}
+        )}
       </div>
     </div>
   );
