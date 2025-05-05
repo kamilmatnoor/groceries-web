@@ -41,9 +41,12 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 
 ## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+<br />
+<div align="center">
+  <a href="https://github.com/kamilmatnoor/groceries-web">
+    <img src="src/assets/images/image-default.jpg" alt="Logo" width="80" height="80">
+  </a>
+</div>
 
 ### Code Splitting
 
