@@ -39,9 +39,12 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+## Sample Screenshots
 
 <br />
+
+### Groceries page to display list of producs
+
 <div align="center">
   <a href="https://github.com/kamilmatnoor/groceries-web">
     <img src="src/assets/images/groceries.PNG" alt="Logo">
@@ -49,6 +52,9 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 </div>
 
 <br />
+
+### Groceries page to display data after searching
+
 <div align="center">
   <a href="https://github.com/kamilmatnoor/groceries-web">
     <img src="src/assets/images/groceries_search.PNG" alt="Logo">
@@ -56,6 +62,9 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 </div>
 
 <br />
+
+### Groceries page to display data after sorting
+
 <div align="center">
   <a href="https://github.com/kamilmatnoor/groceries-web">
     <img src="src/assets/images/groceries_sort_by.PNG" alt="Logo">
@@ -63,6 +72,9 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 </div>
 
 <br />
+
+### New Product page
+
 <div align="center">
   <a href="https://github.com/kamilmatnoor/groceries-web">
     <img src="src/assets/images/new_product.PNG" alt="Logo">
@@ -70,6 +82,9 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 </div>
 
 <br />
+
+### Validation for empty field during Add & Update operation
+
 <div align="center">
   <a href="https://github.com/kamilmatnoor/groceries-web">
     <img src="src/assets/images/new_product_validation.PNG" alt="Logo">
@@ -77,6 +92,9 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 </div>
 
 <br />
+
+### Validation Barcode length during Add & Update operation
+
 <div align="center">
   <a href="https://github.com/kamilmatnoor/groceries-web">
     <img src="src/assets/images/edit_product_extra_validation.PNG" alt="Logo">
@@ -84,6 +102,9 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 </div>
 
 <br />
+
+### Confirmation action message before Update & Delete operation
+
 <div align="center">
   <a href="https://github.com/kamilmatnoor/groceries-web">
     <img src="src/assets/images/delete_product_confirmation.PNG" alt="Logo">
@@ -94,7 +115,6 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 
 ### Success message after Add, Update, Delete operation
 
-<br />
 <div align="center">
   <a href="https://github.com/kamilmatnoor/groceries-web">
     <img src="src/assets/images/delete_product_success.PNG" alt="Logo">
