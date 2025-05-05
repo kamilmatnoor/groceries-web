@@ -5,6 +5,8 @@ import { updateProduct, getProductById } from '../api/productsApi';
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 
+import { ButtonWidget } from '../widgets/ButtonWidget';
+
 const EditProductPage = () => {
     const navigate = useNavigate();
     const [product, setProduct] = useState({ product_barcode: '', product_brand: '', product_name: '', product_description: '' });
@@ -102,19 +104,12 @@ const EditProductPage = () => {
                 </div>
 
                 <div className="flex space-x-2">
-                    <button
-                        type="button"
-                        onClick={() => navigate('/')}
-                        className="bg-gray-500 hover:bg-gray-600 text-white font-medium px-4 py-2 rounded"
-                    >
+                    <ButtonWidget onClick={() => navigate('/')} className="bg-gray-500 hover:bg-gray-600 text-white font-medium px-4 py-2 rounded">
                         Back
-                    </button>
-                    <button
-                        type="submit"
-                        className="bg-blue-500 hover:bg-blue-600 text-white font-medium px-4 py-2 rounded"
-                    >
+                    </ButtonWidget>
+                    <ButtonWidget type="submit" className="bg-blue-500 hover:bg-blue-600 text-white font-medium px-4 py-2 rounded">
                         Submit
-                    </button>
+                    </ButtonWidget>
                 </div>
             </form>
         </div>

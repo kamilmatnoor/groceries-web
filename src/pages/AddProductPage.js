@@ -5,6 +5,8 @@ import { addProduct } from '../api/productsApi';
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 
+import { ButtonWidget } from '../widgets/ButtonWidget';
+
 const AddProductPage = () => {
     const navigate = useNavigate();
     const [product, setProduct] = useState({ product_barcode: '', product_brand: '', product_name: '', product_description: '' });
@@ -21,7 +23,7 @@ const AddProductPage = () => {
 
         const MySwal = withReactContent(Swal)
         try {
-            const response = await addProduct(product);
+            await addProduct(product);
             navigate('/');
             MySwal.fire("Success", "New Product added successfully.", "");
         } catch (error) {
@@ -49,7 +51,7 @@ const AddProductPage = () => {
                         name="product_name"
                         value={product.product_name}
                         onChange={onInputFieldChanged}
-                         placeholder='eg: Nike Air Max 90 LV8 SE'
+                        placeholder='eg: Nike Air Max 90 LV8 SE'
                         className="w-full max-w-xs border border-gray-300 rounded-lg p-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                     />
                     {errors.product_name && (
@@ -97,19 +99,12 @@ const AddProductPage = () => {
                 </div>
 
                 <div className="flex space-x-2">
-                    <button
-                        type="button"
-                        onClick={() => navigate('/')}
-                        className="bg-gray-500 hover:bg-gray-600 text-white font-medium px-4 py-2 rounded"
-                    >
+                    <ButtonWidget onClick={() => navigate('/')} className="bg-gray-500 hover:bg-gray-600 text-white font-medium px-4 py-2 rounded">
                         Back
-                    </button>
-                    <button
-                        type="submit"
-                        className="bg-blue-500 hover:bg-blue-600 text-white font-medium px-4 py-2 rounded"
-                    >
+                    </ButtonWidget>
+                    <ButtonWidget type="submit" className="bg-blue-500 hover:bg-blue-600 text-white font-medium px-4 py-2 rounded">
                         Submit
-                    </button>
+                    </ButtonWidget>
                 </div>
             </form>
         </div>
