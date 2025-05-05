@@ -68,7 +68,7 @@ const EditProductPage = () => {
 
     const checkFormValidation = () => {
         const errs = {};
-        if (!/^[0-9]{12}$/.test(product.product_barcode)) errs.product_barcode = 'UPC12 Barcode must be 12 digits';
+        if (!/^[0-9]{12}$/.test(product.product_barcode)) errs.product_barcode = 'Barcode must be 12 digits of number';
         if (!product.product_brand.trim()) errs.product_brand = 'Brand is required';
         if (!product.product_name.trim()) errs.product_name = 'Name is required';
         setErrors(errs);
