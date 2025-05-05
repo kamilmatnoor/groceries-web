@@ -9,6 +9,7 @@ import withReactContent from 'sweetalert2-react-content';
 import image from '../assets/images/image-1.jpg';
 
 import { ButtonWidget } from '../widgets/ButtonWidget';
+import { SelectWidget } from '../widgets/SelectWidget';
 
 const ProductsPage = () => {
   const navigate = useNavigate();
@@ -107,34 +108,34 @@ const ProductsPage = () => {
 
       <div className="flex flex-wrap mb-4 gap-2 w-full sm:w-auto items-center">
         <label className="text-sm font-medium text-gray-900 dark:text-white">Sort by:</label>
-        <select
-          onChange={(e) => onSortChanged(e.target.value, sortOrder)}
+        <SelectWidget
           value={sortField}
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-        >
-          <option value="product_brand">Brand</option>
-          <option value="product_name">Name</option>
-        </select>
+          onChange={(e) => onSortChanged(e.target.value, sortOrder)}
+          options={[
+            { value: 'product_brand', label: 'Brand' },
+            { value: 'product_name', label: 'Name' }
+          ]}
+        />
 
-        <select
-          onChange={(e) => onSortChanged(sortField, e.target.value)}
+        <SelectWidget
           value={sortOrder}
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-        >
-          <option value="asc">Asc</option>
-          <option value="desc">Desc</option>
-        </select>
+          onChange={(e) => onSortChanged(sortField, e.target.value)}
+          options={[
+            { value: 'asc', label: 'Asc' },
+            { value: 'desc', label: 'Desc' }
+          ]}
+        />
 
         <label className="ml-4 text-sm font-medium text-gray-900 dark:text-white">Page Size:</label>
-        <select
+        <SelectWidget
           value={itemsPerPage}
           onChange={onPageSizeChanged}
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-        >
-          <option value={10}>10</option>
-          <option value={20}>20</option>
-          <option value={50}>50</option>
-        </select>
+          options={[
+            { value: 10, label: '10' },
+            { value: 20, label: '20' },
+            { value: 50, label: '50' }
+          ]}
+        />
 
         <ButtonWidget
           onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
