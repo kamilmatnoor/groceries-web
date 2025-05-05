@@ -44,7 +44,56 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 <br />
 <div align="center">
   <a href="https://github.com/kamilmatnoor/groceries-web">
-    <img src="src/assets/images/image-default.jpg" alt="Logo" width="80" height="80">
+    <img src="src/assets/images/groceries.PNG" alt="Logo">
+  </a>
+</div>
+
+<br />
+<div align="center">
+  <a href="https://github.com/kamilmatnoor/groceries-web">
+    <img src="src/assets/images/groceries_search.PNG" alt="Logo">
+  </a>
+</div>
+
+<br />
+<div align="center">
+  <a href="https://github.com/kamilmatnoor/groceries-web">
+    <img src="src/assets/images/groceries_sort_by.PNG" alt="Logo">
+  </a>
+</div>
+
+<br />
+<div align="center">
+  <a href="https://github.com/kamilmatnoor/groceries-web">
+    <img src="src/assets/images/new_product.PNG" alt="Logo">
+  </a>
+</div>
+
+<br />
+<div align="center">
+  <a href="https://github.com/kamilmatnoor/groceries-web">
+    <img src="src/assets/images/new_product_validation.PNG" alt="Logo">
+  </a>
+</div>
+
+<br />
+<div align="center">
+  <a href="https://github.com/kamilmatnoor/groceries-web">
+    <img src="src/assets/images/edit_product_extra_validation.PNG" alt="Logo">
+  </a>
+</div>
+
+<br />
+<div align="center">
+  <a href="https://github.com/kamilmatnoor/groceries-web">
+    <img src="src/assets/images/delete_product_confirmation.PNG" alt="Logo">
+  </a>
+</div>
+
+<br />
+<div align="center">
+  <a href="https://github.com/kamilmatnoor/groceries-web">
+    <img src="src/assets/images/delete_product_success.PNG" alt="Logo">
   </a>
 </div>
 
