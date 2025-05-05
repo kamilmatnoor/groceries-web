@@ -56,6 +56,7 @@ const ProductsPage = () => {
       title: <p>Warning</p>,
       text: "Are you sure you want to delete this product?",
       confirmButtonText: "Proceed",
+      confirmButtonColor: "#2563EB",
       showCancelButton: true,
     }).then(async (result) => {
       if (result.isConfirmed) {
@@ -88,6 +89,7 @@ const ProductsPage = () => {
         <div className="flex flex-wrap gap-2 w-full sm:w-auto items-center">
           <InputFieldWidget
             type="text"
+            name="search"
             placeholder="Search by Product Name or Brand"
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
