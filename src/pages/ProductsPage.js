@@ -8,6 +8,8 @@ import withReactContent from 'sweetalert2-react-content';
 
 import image from '../assets/images/image-1.jpg';
 
+import { ButtonWidget } from '../widgets/ButtonWidget';
+
 const ProductsPage = () => {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
@@ -89,28 +91,18 @@ const ProductsPage = () => {
             onChange={(e) => setSearchText(e.target.value)}
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white w-full sm:w-[300px]"
           />
-
-          <button
-            onClick={onSearchBtnClicked}
-            className="flex items-center gap-1 bg-blue-500 hover:bg-blue-600 text-white font-medium px-4 py-2.5 rounded w-full sm:w-auto"
-          >
+          <ButtonWidget onClick={onSearchBtnClicked} className="bg-blue-500 hover:bg-blue-600 text-white w-full sm:w-auto">
             Search
-          </button>
+          </ButtonWidget>
 
-          <button
-            onClick={onResetBtnClicked}
-            className="flex items-center gap-1 bg-gray-500 hover:bg-gray-600 text-white font-medium px-4 py-2.5 rounded w-full sm:w-auto"
-          >
+          <ButtonWidget onClick={onResetBtnClicked} className="bg-gray-500 hover:bg-gray-600 text-white w-full sm:w-auto">
             Reset
-          </button>
+          </ButtonWidget>
         </div>
 
-        <button
-          onClick={() => navigate('/add')}
-          className="flex items-center gap-1 bg-green-500 hover:bg-green-600 text-white font-medium px-4 py-2.5 rounded w-full sm:w-auto sm:ml-auto"
-        >
-          Add
-        </button>
+        <ButtonWidget onClick={() => navigate('/add')} className="bg-green-700 hover:bg-green-800 text-white w-full sm:w-auto sm:ml-auto">
+          Add New Product
+        </ButtonWidget>
       </div>
 
       <div className="flex flex-wrap mb-4 gap-2 w-full sm:w-auto items-center">
@@ -144,25 +136,25 @@ const ProductsPage = () => {
           <option value={50}>50</option>
         </select>
 
-        <button
+        <ButtonWidget
           onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
           disabled={currentPage === 1}
-          className="ml-4 bg-gray-300 hover:bg-gray-400 text-gray-800 font-medium px-3 py-2 rounded disabled:opacity-50"
+          className="ml-4 bg-gray-300 hover:bg-gray-400 text-gray-800"
         >
           &lt; Previous
-        </button>
+        </ButtonWidget>
 
         <span className="mx-2 text-sm text-gray-900 dark:text-white">
           Page {currentPage} of {totalPages}
         </span>
 
-        <button
+        <ButtonWidget
           onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
           disabled={currentPage === totalPages}
-          className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-medium px-3 py-2 rounded disabled:opacity-50"
+          className="bg-gray-300 hover:bg-gray-400 text-gray-800"
         >
           Next &gt;
-        </button>
+        </ButtonWidget>
       </div>
       <div className="flex flex-wrap gap-4">
         {products.map((product, index) => (
@@ -184,8 +176,10 @@ const ProductsPage = () => {
               <p className="mb-2 text-sm text-gray-800 dark:text-gray-400">{product.product_description}</p>
 
               <div className="flex justify-end space-x-2 mt-4">
-                <Link to={`/edit/${product._id}`}><button className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded">Edit</button></Link>
-                <button className="bg-gray-500 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded" onClick={() => onDeleteProduct(product._id)}>Delete</button>
+                <Link to={`/edit/${product._id}`}>
+                  <ButtonWidget className="bg-blue-500 hover:bg-blue-600 text-white">Edit</ButtonWidget>
+                </Link>
+                <ButtonWidget className="bg-gray-500 hover:bg-gray-600 text-white" onClick={() => onDeleteProduct(product._id)}>Delete</ButtonWidget>
               </div>
             </div>
           </div>
