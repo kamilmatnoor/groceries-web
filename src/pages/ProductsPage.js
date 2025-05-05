@@ -94,7 +94,7 @@ const ProductsPage = () => {
 
   return (
     <div style={{ padding: '20px' }}>
-      <h2 className="text-4xl font-extrabold dark:text-white mb-4">Products</h2>
+      <h2 className="text-4xl font-extrabold dark:text-white mb-4">Grocery List</h2>
       <div className="flex flex-col w-full mb-4 gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex flex-wrap gap-2 w-full sm:w-auto items-center">
           <InputFieldWidget
