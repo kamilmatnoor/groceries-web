@@ -91,13 +91,15 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 </div>
 
 <br />
+### Success message after add/update/delete
+<br />
 <div align="center">
   <a href="https://github.com/kamilmatnoor/groceries-web">
     <img src="src/assets/images/delete_product_success.PNG" alt="Logo">
   </a>
 </div>
 
-### Code Splitting
+
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
