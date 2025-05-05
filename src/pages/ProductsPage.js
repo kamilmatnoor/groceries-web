@@ -189,7 +189,7 @@ const ProductsPage = () => {
                   <p className="mb-2 text-sm text-gray-800 dark:text-gray-400">{product.product_barcode}</p>
 
                   <p className="text-sm font-thin text-gray-700 dark:text-gray-400">Description</p>
-                  <p className="mb-2 text-sm text-gray-800 dark:text-gray-400">{product.product_description}</p>
+                  <p className="mb-2 text-sm text-gray-800 dark:text-gray-400">{product.product_description ? product.product_description : '-'}</p>
 
                   <div className="flex justify-end space-x-2 mt-4">
                     <Link to={`/edit/${product._id}`}>
