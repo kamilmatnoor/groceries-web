@@ -32,14 +32,25 @@ const EditProductPage = () => {
     const onSubmitBtnClicked = async (e) => {
         e.preventDefault();
         if (!checkFormValidation()) return;
-        try {
-            const response = await updateProduct(id, product);
-            navigate('/');
-            MySwal.fire("Success", "Product updated successfully.", "");
-        } catch (error) {
-            navigate('/');
-            MySwal.fire("Error", "Failed to update product. Please try again.", "");
-        }
+
+        MySwal.fire({
+            icon: "warning",
+            title: <p>Warning</p>,
+            text: "Are you sure you want to update this product?",
+            confirmButtonText: "Proceed",
+            confirmButtonColor: "#2563EB",
+            showCancelButton: true,
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    await updateProduct(id, product);
+                    navigate('/');
+                    MySwal.fire("Success", "Product updated successfully.", "");
+                } catch (error) {
+                    MySwal.fire("Error", "Failed to update product. Please try again.", "");
+                }
+            }
+        });
     };
 
     const checkFormValidation = () => {
