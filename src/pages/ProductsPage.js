@@ -18,7 +18,7 @@ const ProductsPage = () => {
 
   const fetchProducts = useCallback(async (searchParam) => {
     try {
-      const allProducts = await getProducts({ searchText:searchParam, currentPage, sortField, sortOrder, itemsPerPage });
+      const allProducts = await getProducts({ searchText: searchParam, currentPage, sortField, sortOrder, itemsPerPage });
       const tempTotalPages = Math.ceil(allProducts.length / itemsPerPage);
       setProducts(allProducts);
       setTotalPages(tempTotalPages);
@@ -78,15 +78,40 @@ const ProductsPage = () => {
   return (
     <div style={{ padding: '20px' }}>
       <h2>Products</h2>
-      <input
-        type="text"
-        placeholder="Search by Product Name or Brand"
-        value={searchText}
-        onChange={(e) => setSearchText(e.target.value)}
-      />
-      <button onClick={onSearchBtnClicked}>Search</button>
-      <button onClick={onResetBtnClicked}>Reset</button>
-      <button onClick={() => navigate('/add')}>Add</button>
+      <div className="flex flex-col sm:flex-row w-full mb-4 gap-2 items-center">
+        <div className="flex flex-wrap gap-2 w-full sm:w-auto items-center">
+          <input
+            type="text"
+            placeholder="Search by Product Name or Brand"
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white w-full sm:w-auto"
+          />
+
+          <button
+            onClick={onSearchBtnClicked}
+            className="flex items-center gap-1 bg-blue-500 hover:bg-blue-600 text-white font-medium px-4 py-2.5 rounded w-full sm:w-auto"
+          >
+            Search
+          </button>
+
+          <button
+            onClick={onResetBtnClicked}
+            className="flex items-center gap-1 bg-gray-500 hover:bg-gray-600 text-white font-medium px-4 py-2.5 rounded w-full sm:w-auto"
+          >
+            Reset
+          </button>
+        </div>
+
+        <div className="sm:ml-auto w-full sm:w-auto">
+          <button
+            onClick={() => navigate('/add')}
+            className="flex items-center gap-1 bg-green-500 hover:bg-green-600 text-white font-medium px-4 py-2.5 rounded w-full sm:w-auto"
+          >
+            Add
+          </button>
+        </div>
+      </div>
       <div>
         <label>Sort by: </label>
         <select onChange={(e) => onSortChanged(e.target.value, sortOrder)} value={sortField}>
