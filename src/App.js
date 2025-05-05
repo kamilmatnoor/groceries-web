@@ -8,12 +8,12 @@ import EditProductPage from "./pages/EditProductPage";
 function App() {
   return (
     <Router>
-    <Routes>
-    <Route path="/add" element={<AddProductPage />} />
-    <Route path="/edit/:id" element={<EditProductPage />} />
-    <Route path="/" element={<ProductsPage />} />
-    </Routes>
-  </Router>
+      <Routes>
+        <Route path="/add" element={<AddProductPage />} />
+        <Route path="/edit/:id" element={<EditProductPage />} />
+        <Route path="/" element={<ProductsPage />} />
+      </Routes>
+    </Router>
   );
 }
 
