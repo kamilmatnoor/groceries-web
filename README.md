@@ -17,8 +17,8 @@ In the project directory, you may follow this:
 * `npm start`
 
 Runs the app in the development mode.\
-Check the console to know you running port
-You may access the app through your browser by given url eg. `http://localhost:3000`
+Check the console to know you running port.\
+You may access the app through your browser by given url eg. `http://localhost:3000`.\
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
