@@ -27,14 +27,29 @@ const AddProductPage = () => {
         try {
             const response = await addProduct(product);
             if (response.error) {
-                MySwal.fire("Error", "Failed to add new product. Please try again.", "");
+                MySwal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: "Failed to add new product. Please try again.",
+                    confirmButtonColor: '#2563EB'
+                });
             } else {
                 navigate('/');
-                MySwal.fire("Success", "New Product added successfully.", "");
+                MySwal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: "New Product added successfully.",
+                    confirmButtonColor: '#2563EB'
+                });
             }
 
         } catch (error) {
-            MySwal.fire("Error", "Failed to add new product. Please try again.", "");
+            MySwal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: "Failed to add new product. Please try again.",
+                confirmButtonColor: '#2563EB'
+            });
         }
     };
 

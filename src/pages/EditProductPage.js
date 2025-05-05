@@ -20,13 +20,23 @@ const EditProductPage = () => {
             .then(data => {
                 if (data.error) {
                     navigate('/');
-                    MySwal.fire("Error", "Failed to get product details. Please try again.", "");
+                    MySwal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: "Failed to get product details. Please try again.",
+                        confirmButtonColor: '#2563EB'
+                    });
                 } else {
                     setProduct(data.products)
                 }
             })
             .catch(error => {
-                MySwal.fire("Error", "Failed to get product details. Please try again.", "");
+                MySwal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: "Failed to get product details. Please try again.",
+                    confirmButtonColor: '#2563EB'
+                });
                 navigate('/');
             });
     }, [id]);
@@ -52,14 +62,29 @@ const EditProductPage = () => {
                 try {
                     const response = await updateProduct(id, product);
                     if (response.error) {
-                        MySwal.fire("Error", "Failed to update product. Please try again.", "");
+                        MySwal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: "Failed to update product. Please try again.",
+                            confirmButtonColor: '#2563EB'
+                        });
                     } else {
                         navigate('/');
-                        MySwal.fire("Success", "Product updated successfully.", "");
+                        MySwal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: "Product updated successfully.",
+                            confirmButtonColor: '#2563EB'
+                        });
                     }
 
                 } catch (error) {
-                    MySwal.fire("Error", "Failed to update product. Please try again.", "");
+                    MySwal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: "Failed to update product. Please try again.",
+                        confirmButtonColor: '#2563EB'
+                    });
                 }
             }
 

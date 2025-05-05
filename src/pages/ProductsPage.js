@@ -68,14 +68,29 @@ const ProductsPage = () => {
         try {
           const response = await deleteProduct(id);
           if (response.error) {
-            MySwal.fire("Error", "Failed deleting product. Please try again.", "");
+            MySwal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: "Failed deleting product. Please try again.",
+              confirmButtonColor: '#2563EB'
+            });
           } else {
             fetchProducts();
-            MySwal.fire("Success", "Deleted successfully.", "");
+            MySwal.fire({
+              icon: 'success',
+              title: 'Success',
+              text: "Product deleted successfully.",
+              confirmButtonColor: '#2563EB'
+            });
           }
 
         } catch (error) {
-          MySwal.fire("Error", "Failed deleting product. Please try again.", "");
+          MySwal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: "Failed deleting product. Please try again.",
+            confirmButtonColor: '#2563EB'
+          });
         }
       }
     });
