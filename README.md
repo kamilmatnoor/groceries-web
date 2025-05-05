@@ -47,7 +47,7 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 
 <div align="center">
   <a href="https://github.com/kamilmatnoor/groceries-web">
-    <img src="src/assets/images/groceries.PNG" alt="Logo">
+    <img src="src/assets/images/groceries.PNG" alt="Image">
   </a>
 </div>
 
@@ -57,7 +57,7 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 
 <div align="center">
   <a href="https://github.com/kamilmatnoor/groceries-web">
-    <img src="src/assets/images/groceries_search.PNG" alt="Logo">
+    <img src="src/assets/images/groceries_search.PNG" alt="Image">
   </a>
 </div>
 
@@ -67,7 +67,7 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 
 <div align="center">
   <a href="https://github.com/kamilmatnoor/groceries-web">
-    <img src="src/assets/images/groceries_sort_by.PNG" alt="Logo">
+    <img src="src/assets/images/groceries_sort_by.PNG" alt="Image">
   </a>
 </div>
 
@@ -77,7 +77,7 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 
 <div align="center">
   <a href="https://github.com/kamilmatnoor/groceries-web">
-    <img src="src/assets/images/new_product.PNG" alt="Logo">
+    <img src="src/assets/images/new_product.PNG" alt="Image">
   </a>
 </div>
 
@@ -87,7 +87,7 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 
 <div align="center">
   <a href="https://github.com/kamilmatnoor/groceries-web">
-    <img src="src/assets/images/new_product_validation.PNG" alt="Logo">
+    <img src="src/assets/images/new_product_validation.PNG" alt="Image">
   </a>
 </div>
 
@@ -97,7 +97,7 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 
 <div align="center">
   <a href="https://github.com/kamilmatnoor/groceries-web">
-    <img src="src/assets/images/edit_product_extra_validation.PNG" alt="Logo">
+    <img src="src/assets/images/edit_product_barcode_extra_validation.PNG" alt="Image">
   </a>
 </div>
 
@@ -107,7 +107,7 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 
 <div align="center">
   <a href="https://github.com/kamilmatnoor/groceries-web">
-    <img src="src/assets/images/delete_product_confirmation.PNG" alt="Logo">
+    <img src="src/assets/images/delete_product_confirmation.PNG" alt="Image">
   </a>
 </div>
 
@@ -117,7 +117,7 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 
 <div align="center">
   <a href="https://github.com/kamilmatnoor/groceries-web">
-    <img src="src/assets/images/delete_product_success.PNG" alt="Logo">
+    <img src="src/assets/images/delete_product_success.PNG" alt="Image">
   </a>
 </div>
 
