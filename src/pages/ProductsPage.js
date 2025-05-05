@@ -10,6 +10,7 @@ import image from '../assets/images/image-1.jpg';
 
 import { ButtonWidget } from '../widgets/ButtonWidget';
 import { SelectWidget } from '../widgets/SelectWidget';
+import { InputFieldWidget } from '../widgets/InputFieldWidget';
 
 const ProductsPage = () => {
   const navigate = useNavigate();
@@ -85,12 +86,12 @@ const ProductsPage = () => {
       <h2 className="text-4xl font-extrabold dark:text-white mb-4">Products</h2>
       <div className="flex flex-col w-full mb-4 gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex flex-wrap gap-2 w-full sm:w-auto items-center">
-          <input
+          <InputFieldWidget
             type="text"
             placeholder="Search by Product Name or Brand"
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white w-full sm:w-[300px]"
+            className="w-full sm:w-[300px]"
           />
           <ButtonWidget onClick={onSearchBtnClicked} className="bg-blue-500 hover:bg-blue-600 text-white w-full sm:w-auto">
             Search
