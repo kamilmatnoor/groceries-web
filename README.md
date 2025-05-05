@@ -1,70 +1,110 @@
-# Getting Started with Create React App
+# Getting Started with Groceries
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Prerequisites
+
+Please run backend before proceed. You may visit this [repo](https://github.com/kamilmatnoor/groceries-api) to start.
+
 ## Available Scripts
 
-In the project directory, you can run:
+In the project directory, you may follow this:
 
-### `npm start`
+#### Steps
+* `git clone https://github.com/kamilmatnoor/groceries-web.git`
+* `cd groceries-web`
+* `npm install`
+* `npm start`
 
 Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Check the console to know you running port
+You may access the app through your browser by given url eg. `http://localhost:3000`
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-### `npm test`
+## Live Demo
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+[Click here](https://groceries-frontend-de1a392ddce5.herokuapp.com/) to see the demo
 
-### `npm run build`
+## Sample Screenshots
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<br />
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Groceries page to display list of producs
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<div align="center">
+  <a href="https://github.com/kamilmatnoor/groceries-web">
+    <img src="src/assets/images/groceries.PNG" alt="Image">
+  </a>
+</div>
 
-### `npm run eject`
+<br />
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Groceries page to display data after searching
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<div align="center">
+  <a href="https://github.com/kamilmatnoor/groceries-web">
+    <img src="src/assets/images/groceries_search.PNG" alt="Image">
+  </a>
+</div>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+<br />
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Groceries page to display data after sorting
 
-## Learn More
+<div align="center">
+  <a href="https://github.com/kamilmatnoor/groceries-web">
+    <img src="src/assets/images/groceries_sort_by.PNG" alt="Image">
+  </a>
+</div>
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<br />
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### New Product page
 
-### Code Splitting
+<div align="center">
+  <a href="https://github.com/kamilmatnoor/groceries-web">
+    <img src="src/assets/images/new_product.PNG" alt="Image">
+  </a>
+</div>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+<br />
 
-### Analyzing the Bundle Size
+### Validation for empty field during Add & Update operation
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+<div align="center">
+  <a href="https://github.com/kamilmatnoor/groceries-web">
+    <img src="src/assets/images/new_product_validation.PNG" alt="Image">
+  </a>
+</div>
 
-### Making a Progressive Web App
+<br />
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Validation Barcode length during Add & Update operation
 
-### Advanced Configuration
+<div align="center">
+  <a href="https://github.com/kamilmatnoor/groceries-web">
+    <img src="src/assets/images/edit_product_barcode_extra_validation.PNG" alt="Image">
+  </a>
+</div>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+<br />
 
-### Deployment
+### Confirmation action message before Update & Delete operation
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+<div align="center">
+  <a href="https://github.com/kamilmatnoor/groceries-web">
+    <img src="src/assets/images/delete_product_confirmation.PNG" alt="Image">
+  </a>
+</div>
 
-### `npm run build` fails to minify
+<br />
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Success message after Add, Update, Delete operation
+
+<div align="center">
+  <a href="https://github.com/kamilmatnoor/groceries-web">
+    <img src="src/assets/images/delete_product_success.PNG" alt="Image">
+  </a>
+</div>

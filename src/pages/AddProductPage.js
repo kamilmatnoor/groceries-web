@@ -27,22 +27,41 @@ const AddProductPage = () => {
         try {
             const response = await addProduct(product);
             if (response.error) {
-                MySwal.fire("Error", "Failed to add new product. Please try again.", "");
+                MySwal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: "Failed to add new product. Please try again.",
+                    confirmButtonColor: '#2563EB'
+                });
             } else {
                 navigate('/');
-                MySwal.fire("Success", "New Product added successfully.", "");
+                MySwal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: "New Product added successfully.",
+                    confirmButtonColor: '#2563EB'
+                });
             }
 
         } catch (error) {
-            MySwal.fire("Error", "Failed to add new product. Please try again.", "");
+            MySwal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: "Failed to add new product. Please try again.",
+                confirmButtonColor: '#2563EB'
+            });
         }
     };
 
     const checkFormValidation = () => {
         const errs = {};
-        if (!/^[0-9]{12}$/.test(product.product_barcode)) errs.product_barcode = 'UPC12 Barcode must be 12 digits';
+        if (!product.product_barcode.trim()) {
+            errs.product_barcode = 'Barcode is required';
+        } else if (!/^[0-9]{12}$/.test(product.product_barcode)) {
+            errs.product_barcode = 'Barcode must be 12 digits of number';
+        }
         if (!product.product_brand.trim()) errs.product_brand = 'Brand is required';
-        if (!product.product_name.trim()) errs.product_name = 'Name is required';
+        if (!product.product_name.trim()) errs.product_name = 'Product Name is required';
         setErrors(errs);
         return Object.keys(errs).length === 0;
     };
@@ -52,7 +71,7 @@ const AddProductPage = () => {
             <h2 className="text-4xl font-extrabold dark:text-white mb-4">New Product</h2>
             <form onSubmit={onSubmitBtnClicked} className="space-y-4">
                 <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Name</label>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Product Name</label>
                     <InputFieldWidget
                         name="product_name"
                         value={product.product_name}
