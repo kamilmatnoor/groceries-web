@@ -50,29 +50,72 @@ const EditProductPage = () => {
 
     return (
         <div style={{ padding: '20px' }}>
-            <h2>New Product</h2>
-            <form onSubmit={onSubmitBtnClicked}>
+            <h2 class="text-4xl font-extrabold dark:text-white mb-4">Edit Product</h2>
+            <form onSubmit={onSubmitBtnClicked} className="space-y-4">
                 <div>
-                    <label>UPC12 Barcode:</label>
-                    <input name="product_barcode" value={product.product_barcode} onChange={onInputFieldChanged} />
-                    {errors.product_barcode && <div style={{ color: 'red', fontSize: 12 }}>{errors.product_barcode}</div>}
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">UPC12 Barcode:</label>
+                    <input
+                        name="product_barcode"
+                        value={product.product_barcode}
+                        onChange={onInputFieldChanged}
+                        className="w-full max-w-xs border border-gray-300 rounded-lg p-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                    />
+                    {errors.product_barcode && (
+                        <div className="text-red-500 text-xs mt-1">{errors.product_barcode}</div>
+                    )}
                 </div>
+
                 <div>
-                    <label>Product Brand:</label>
-                    <input name="product_brand" value={product.product_brand} onChange={onInputFieldChanged} />
-                    {errors.product_brand && <div style={{ color: 'red', fontSize: 12 }}>{errors.product_brand}</div>}
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Product Brand:</label>
+                    <input
+                        name="product_brand"
+                        value={product.product_brand}
+                        onChange={onInputFieldChanged}
+                        className="w-full max-w-xs border border-gray-300 rounded-lg p-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                    />
+                    {errors.product_brand && (
+                        <div className="text-red-500 text-xs mt-1">{errors.product_brand}</div>
+                    )}
                 </div>
+
                 <div>
-                    <label>Product Name:</label>
-                    <input name="product_name" value={product.product_name} onChange={onInputFieldChanged} />
-                    {errors.product_name && <div style={{ color: 'red', fontSize: 12 }}>{errors.product_name}</div>}
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Product Name:</label>
+                    <input
+                        name="product_name"
+                        value={product.product_name}
+                        onChange={onInputFieldChanged}
+                        className="w-full max-w-xs border border-gray-300 rounded-lg p-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                    />
+                    {errors.product_name && (
+                        <div className="text-red-500 text-xs mt-1">{errors.product_name}</div>
+                    )}
                 </div>
+
                 <div>
-                    <label>Product Description:</label>
-                    <input name="product_description" value={product.product_description} onChange={onInputFieldChanged} />
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Product Description:</label>
+                    <input
+                        name="product_description"
+                        value={product.product_description}
+                        onChange={onInputFieldChanged}
+                        className="w-full max-w-xs border border-gray-300 rounded-lg p-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                    />
                 </div>
-                <button type="button" onClick={() => navigate('/')}>Back</button>
-                <button type="submit">Submit</button>
+
+                <div className="flex space-x-2">
+                    <button
+                        type="button"
+                        onClick={() => navigate('/')}
+                        className="bg-gray-500 hover:bg-gray-600 text-white font-medium px-4 py-2 rounded"
+                    >
+                        Back
+                    </button>
+                    <button
+                        type="submit"
+                        className="bg-blue-500 hover:bg-blue-600 text-white font-medium px-4 py-2 rounded"
+                    >
+                        Submit
+                    </button>
+                </div>
             </form>
         </div>
     );
