@@ -6,6 +6,7 @@ import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 
 import { ButtonWidget } from '../widgets/ButtonWidget';
+import { InputFieldWidget } from '../widgets/InputFieldWidget';
 
 const AddProductPage = () => {
     const navigate = useNavigate();
@@ -47,12 +48,12 @@ const AddProductPage = () => {
             <form onSubmit={onSubmitBtnClicked} className="space-y-4">
                 <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Name</label>
-                    <input
+                    <InputFieldWidget
                         name="product_name"
                         value={product.product_name}
                         onChange={onInputFieldChanged}
+                        className="w-full max-w-xs"
                         placeholder='eg: Nike Air Max 90 LV8 SE'
-                        className="w-full max-w-xs border border-gray-300 rounded-lg p-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                     />
                     {errors.product_name && (
                         <div className="text-red-500 text-xs mt-1">{errors.product_name}</div>
@@ -61,12 +62,12 @@ const AddProductPage = () => {
 
                 <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Brand</label>
-                    <input
+                    <InputFieldWidget
                         name="product_brand"
                         value={product.product_brand}
                         onChange={onInputFieldChanged}
+                        className="w-full max-w-xs"
                         placeholder='eg: Nike'
-                        className="w-full max-w-xs border border-gray-300 rounded-lg p-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                     />
                     {errors.product_brand && (
                         <div className="text-red-500 text-xs mt-1">{errors.product_brand}</div>
@@ -75,12 +76,12 @@ const AddProductPage = () => {
 
                 <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Barcode</label>
-                    <input
+                    <InputFieldWidget
                         name="product_barcode"
                         value={product.product_barcode}
                         onChange={onInputFieldChanged}
+                        className="w-full max-w-xs"
                         placeholder='eg: 123456789012'
-                        className="w-full max-w-xs border border-gray-300 rounded-lg p-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                     />
                     {errors.product_barcode && (
                         <div className="text-red-500 text-xs mt-1">{errors.product_barcode}</div>
@@ -89,12 +90,12 @@ const AddProductPage = () => {
 
                 <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Description</label>
-                    <input
+                    <InputFieldWidget
                         name="product_description"
                         value={product.product_description}
                         onChange={onInputFieldChanged}
+                        className="w-full max-w-xs"
                         placeholder='eg: Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-                        className="w-full max-w-xs border border-gray-300 rounded-lg p-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                     />
                 </div>
 

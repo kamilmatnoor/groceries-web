@@ -6,6 +6,7 @@ import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 
 import { ButtonWidget } from '../widgets/ButtonWidget';
+import { InputFieldWidget } from '../widgets/InputFieldWidget';
 
 const EditProductPage = () => {
     const navigate = useNavigate();
@@ -56,11 +57,11 @@ const EditProductPage = () => {
             <form onSubmit={onSubmitBtnClicked} className="space-y-4">
                 <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Name</label>
-                    <input
+                    <InputFieldWidget
                         name="product_name"
                         value={product.product_name}
                         onChange={onInputFieldChanged}
-                        className="w-full max-w-xs border border-gray-300 rounded-lg p-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                        className="w-full max-w-xs"
                     />
                     {errors.product_name && (
                         <div className="text-red-500 text-xs mt-1">{errors.product_name}</div>
@@ -69,11 +70,11 @@ const EditProductPage = () => {
 
                 <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Brand</label>
-                    <input
+                    <InputFieldWidget
                         name="product_brand"
                         value={product.product_brand}
                         onChange={onInputFieldChanged}
-                        className="w-full max-w-xs border border-gray-300 rounded-lg p-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                        className="w-full max-w-xs"
                     />
                     {errors.product_brand && (
                         <div className="text-red-500 text-xs mt-1">{errors.product_brand}</div>
@@ -82,11 +83,11 @@ const EditProductPage = () => {
 
                 <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Barcode</label>
-                    <input
+                    <InputFieldWidget
                         name="product_barcode"
                         value={product.product_barcode}
                         onChange={onInputFieldChanged}
-                        className="w-full max-w-xs border border-gray-300 rounded-lg p-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                        className="w-full max-w-xs"
                     />
                     {errors.product_barcode && (
                         <div className="text-red-500 text-xs mt-1">{errors.product_barcode}</div>
@@ -95,11 +96,11 @@ const EditProductPage = () => {
 
                 <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Description</label>
-                    <input
+                    <InputFieldWidget
                         name="product_description"
                         value={product.product_description}
                         onChange={onInputFieldChanged}
-                        className="w-full max-w-xs border border-gray-300 rounded-lg p-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                        className="w-full max-w-xs"
                     />
                 </div>
 
