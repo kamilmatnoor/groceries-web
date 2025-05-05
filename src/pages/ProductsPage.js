@@ -6,7 +6,11 @@ import { getProducts, deleteProduct } from "../api/productsApi";
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
-import image from '../assets/images/image-1.jpg';
+import imageDefault from '../assets/images/image-default.jpg';
+
+import { ButtonWidget } from '../widgets/ButtonWidget';
+import { SelectWidget } from '../widgets/SelectWidget';
+import { InputFieldWidget } from '../widgets/InputFieldWidget';
 
 const ProductsPage = () => {
   const navigate = useNavigate();
@@ -21,11 +25,16 @@ const ProductsPage = () => {
   const fetchProducts = useCallback(async (searchParam) => {
     try {
       const responseProducts = await getProducts({ searchText: searchParam, currentPage, sortField, sortOrder, itemsPerPage });
-      const tempTotalPages = Math.ceil(responseProducts.totals / itemsPerPage);
       setProducts(responseProducts.products);
+      if (responseProducts.error) {
+        setTotalPages(1);
+        return;
+      }
+      const tempTotalPages = Math.ceil(responseProducts.totals / itemsPerPage);
       setTotalPages(tempTotalPages);
     } catch (error) {
       setProducts([]);
+      setTotalPages(1);
     }
   }, [currentPage, sortField, sortOrder, itemsPerPage]);
 
@@ -52,15 +61,21 @@ const ProductsPage = () => {
       title: <p>Warning</p>,
       text: "Are you sure you want to delete this product?",
       confirmButtonText: "Proceed",
+      confirmButtonColor: "#2563EB",
       showCancelButton: true,
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await deleteProduct(id);
-          fetchProducts();
-          MySwal.fire("Success", "Deleted successfully.", "");
+          const response = await deleteProduct(id);
+          if (response.error) {
+            MySwal.fire("Error", "Failed deleting product. Please try again.", "");
+          } else {
+            fetchProducts();
+            MySwal.fire("Success", "Deleted successfully.", "");
+          }
+
         } catch (error) {
-          MySwal.fire("Error", "Failed deleting product.", "");
+          MySwal.fire("Error", "Failed deleting product. Please try again.", "");
         }
       }
     });
@@ -82,114 +97,111 @@ const ProductsPage = () => {
       <h2 className="text-4xl font-extrabold dark:text-white mb-4">Products</h2>
       <div className="flex flex-col w-full mb-4 gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex flex-wrap gap-2 w-full sm:w-auto items-center">
-          <input
+          <InputFieldWidget
             type="text"
+            name="search"
             placeholder="Search by Product Name or Brand"
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white w-full sm:w-[300px]"
+            className="w-full sm:w-[300px]"
           />
-
-          <button
-            onClick={onSearchBtnClicked}
-            className="flex items-center gap-1 bg-blue-500 hover:bg-blue-600 text-white font-medium px-4 py-2.5 rounded w-full sm:w-auto"
-          >
+          <ButtonWidget onClick={onSearchBtnClicked} className="bg-blue-500 hover:bg-blue-600 text-white w-full sm:w-auto">
             Search
-          </button>
+          </ButtonWidget>
 
-          <button
-            onClick={onResetBtnClicked}
-            className="flex items-center gap-1 bg-gray-500 hover:bg-gray-600 text-white font-medium px-4 py-2.5 rounded w-full sm:w-auto"
-          >
+          <ButtonWidget onClick={onResetBtnClicked} className="bg-gray-500 hover:bg-gray-600 text-white w-full sm:w-auto">
             Reset
-          </button>
+          </ButtonWidget>
         </div>
 
-        <button
-          onClick={() => navigate('/add')}
-          className="flex items-center gap-1 bg-green-500 hover:bg-green-600 text-white font-medium px-4 py-2.5 rounded w-full sm:w-auto sm:ml-auto"
-        >
-          Add
-        </button>
+        <ButtonWidget onClick={() => navigate('/add')} className="bg-green-700 hover:bg-green-800 text-white w-full sm:w-auto sm:ml-auto">
+          Add New Product
+        </ButtonWidget>
       </div>
 
       <div className="flex flex-wrap mb-4 gap-2 w-full sm:w-auto items-center">
         <label className="text-sm font-medium text-gray-900 dark:text-white">Sort by:</label>
-        <select
-          onChange={(e) => onSortChanged(e.target.value, sortOrder)}
+        <SelectWidget
           value={sortField}
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-        >
-          <option value="product_brand">Brand</option>
-          <option value="product_name">Name</option>
-        </select>
+          onChange={(e) => onSortChanged(e.target.value, sortOrder)}
+          options={[
+            { value: 'product_brand', label: 'Brand' },
+            { value: 'product_name', label: 'Name' }
+          ]}
+        />
 
-        <select
-          onChange={(e) => onSortChanged(sortField, e.target.value)}
+        <SelectWidget
           value={sortOrder}
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-        >
-          <option value="asc">Asc</option>
-          <option value="desc">Desc</option>
-        </select>
+          onChange={(e) => onSortChanged(sortField, e.target.value)}
+          options={[
+            { value: 'asc', label: 'Asc' },
+            { value: 'desc', label: 'Desc' }
+          ]}
+        />
 
         <label className="ml-4 text-sm font-medium text-gray-900 dark:text-white">Page Size:</label>
-        <select
+        <SelectWidget
           value={itemsPerPage}
           onChange={onPageSizeChanged}
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-        >
-          <option value={10}>10</option>
-          <option value={20}>20</option>
-          <option value={50}>50</option>
-        </select>
+          options={[
+            { value: 10, label: '10' },
+            { value: 20, label: '20' },
+            { value: 50, label: '50' }
+          ]}
+        />
 
-        <button
+        <ButtonWidget
           onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
           disabled={currentPage === 1}
-          className="ml-4 bg-gray-300 hover:bg-gray-400 text-gray-800 font-medium px-3 py-2 rounded disabled:opacity-50"
+          className="ml-4 bg-gray-300 hover:bg-gray-400 text-gray-800"
         >
           &lt; Previous
-        </button>
+        </ButtonWidget>
 
         <span className="mx-2 text-sm text-gray-900 dark:text-white">
           Page {currentPage} of {totalPages}
         </span>
 
-        <button
+        <ButtonWidget
           onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
           disabled={currentPage === totalPages}
-          className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-medium px-3 py-2 rounded disabled:opacity-50"
+          className="bg-gray-300 hover:bg-gray-400 text-gray-800"
         >
           Next &gt;
-        </button>
+        </ButtonWidget>
       </div>
-      <div className="flex flex-wrap gap-4">
-        {products.map((product, index) => (
-          <div key={index} className="max-w-64 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
-            <a href="#">
-              <img className="rounded-t-lg w-full" src={image} alt="{product.name}" />
-            </a>
-            <div className="p-5">
-              <p className="text-sm font-thin text-gray-700 dark:text-gray-400">Product</p>
-              <p className="mb-2 text-sm text-gray-800 dark:text-gray-400">{product.product_name}</p>
+      <div>
+        {products.length === 0 ? (
+          <p className="text-center mt-40 text-gray-400 dark:text-gray-300 text-2xl">No available products.</p>
+        ) : (
+          <div className="flex flex-wrap gap-4">
+            {products.map((product, index) => (
+              <div key={index} className="max-w-64 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+                <img className="rounded-t-lg w-full" src={imageDefault} alt="{product.name}" />
+                <div className="p-5">
+                  <p className="text-sm font-thin text-gray-700 dark:text-gray-400">Product</p>
+                  <p className="mb-2 text-sm text-gray-800 dark:text-gray-400">{product.product_name}</p>
 
-              <p className="text-sm font-thin text-gray-700 dark:text-gray-400">Brand</p>
-              <p className="mb-2 text-sm text-gray-800 dark:text-gray-400">{product.product_brand}</p>
+                  <p className="text-sm font-thin text-gray-700 dark:text-gray-400">Brand</p>
+                  <p className="mb-2 text-sm text-gray-800 dark:text-gray-400">{product.product_brand}</p>
 
-              <p className="text-sm font-thin text-gray-700 dark:text-gray-400">Barcode</p>
-              <p className="mb-2 text-sm text-gray-800 dark:text-gray-400">{product.product_barcode}</p>
+                  <p className="text-sm font-thin text-gray-700 dark:text-gray-400">Barcode</p>
+                  <p className="mb-2 text-sm text-gray-800 dark:text-gray-400">{product.product_barcode}</p>
 
-              <p className="text-sm font-thin text-gray-700 dark:text-gray-400">Description</p>
-              <p className="mb-2 text-sm text-gray-800 dark:text-gray-400">{product.product_description}</p>
+                  <p className="text-sm font-thin text-gray-700 dark:text-gray-400">Description</p>
+                  <p className="mb-2 text-sm text-gray-800 dark:text-gray-400">{product.product_description}</p>
 
-              <div className="flex justify-end space-x-2 mt-4">
-                <Link to={`/edit/${product._id}`}><button className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded">Edit</button></Link>
-                <button className="bg-gray-500 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded" onClick={() => onDeleteProduct(product._id)}>Delete</button>
+                  <div className="flex justify-end space-x-2 mt-4">
+                    <Link to={`/edit/${product._id}`}>
+                      <ButtonWidget className="bg-blue-500 hover:bg-blue-600 text-white">Edit</ButtonWidget>
+                    </Link>
+                    <ButtonWidget className="bg-gray-500 hover:bg-gray-600 text-white" onClick={() => onDeleteProduct(product._id)}>Delete</ButtonWidget>
+                  </div>
+                </div>
               </div>
-            </div>
+            ))}
           </div>
-        ))}
+        )}
       </div>
     </div>
   );

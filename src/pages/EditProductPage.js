@@ -5,6 +5,9 @@ import { updateProduct, getProductById } from '../api/productsApi';
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 
+import { ButtonWidget } from '../widgets/ButtonWidget';
+import { InputFieldWidget } from '../widgets/InputFieldWidget';
+
 const EditProductPage = () => {
     const navigate = useNavigate();
     const [product, setProduct] = useState({ product_barcode: '', product_brand: '', product_name: '', product_description: '' });
@@ -14,7 +17,14 @@ const EditProductPage = () => {
 
     useEffect(() => {
         getProductById(id)
-            .then(data => setProduct(data))
+            .then(data => {
+                if (data.error) {
+                    navigate('/');
+                    MySwal.fire("Error", "Failed to get product details. Please try again.", "");
+                } else {
+                    setProduct(data.products)
+                }
+            })
             .catch(error => {
                 MySwal.fire("Error", "Failed to get product details. Please try again.", "");
                 navigate('/');
@@ -29,14 +39,31 @@ const EditProductPage = () => {
     const onSubmitBtnClicked = async (e) => {
         e.preventDefault();
         if (!checkFormValidation()) return;
-        try {
-            const response = await updateProduct(id, product);
-            navigate('/');
-            MySwal.fire("Success", "Product updated successfully.", "");
-        } catch (error) {
-            navigate('/');
-            MySwal.fire("Error", "Failed to update product. Please try again.", "");
-        }
+
+        MySwal.fire({
+            icon: "warning",
+            title: <p>Warning</p>,
+            text: "Are you sure you want to update this product?",
+            confirmButtonText: "Proceed",
+            confirmButtonColor: "#2563EB",
+            showCancelButton: true,
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    const response = await updateProduct(id, product);
+                    if (response.error) {
+                        MySwal.fire("Error", "Failed to update product. Please try again.", "");
+                    } else {
+                        navigate('/');
+                        MySwal.fire("Success", "Product updated successfully.", "");
+                    }
+
+                } catch (error) {
+                    MySwal.fire("Error", "Failed to update product. Please try again.", "");
+                }
+            }
+
+        });
     };
 
     const checkFormValidation = () => {
@@ -54,11 +81,11 @@ const EditProductPage = () => {
             <form onSubmit={onSubmitBtnClicked} className="space-y-4">
                 <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Name</label>
-                    <input
+                    <InputFieldWidget
                         name="product_name"
                         value={product.product_name}
                         onChange={onInputFieldChanged}
-                        className="w-full max-w-xs border border-gray-300 rounded-lg p-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                        className="w-full max-w-xs"
                     />
                     {errors.product_name && (
                         <div className="text-red-500 text-xs mt-1">{errors.product_name}</div>
@@ -67,11 +94,11 @@ const EditProductPage = () => {
 
                 <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Brand</label>
-                    <input
+                    <InputFieldWidget
                         name="product_brand"
                         value={product.product_brand}
                         onChange={onInputFieldChanged}
-                        className="w-full max-w-xs border border-gray-300 rounded-lg p-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                        className="w-full max-w-xs"
                     />
                     {errors.product_brand && (
                         <div className="text-red-500 text-xs mt-1">{errors.product_brand}</div>
@@ -80,11 +107,11 @@ const EditProductPage = () => {
 
                 <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Barcode</label>
-                    <input
+                    <InputFieldWidget
                         name="product_barcode"
                         value={product.product_barcode}
                         onChange={onInputFieldChanged}
-                        className="w-full max-w-xs border border-gray-300 rounded-lg p-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                        className="w-full max-w-xs"
                     />
                     {errors.product_barcode && (
                         <div className="text-red-500 text-xs mt-1">{errors.product_barcode}</div>
@@ -93,28 +120,21 @@ const EditProductPage = () => {
 
                 <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Description</label>
-                    <input
+                    <InputFieldWidget
                         name="product_description"
                         value={product.product_description}
                         onChange={onInputFieldChanged}
-                        className="w-full max-w-xs border border-gray-300 rounded-lg p-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                        className="w-full max-w-xs"
                     />
                 </div>
 
                 <div className="flex space-x-2">
-                    <button
-                        type="button"
-                        onClick={() => navigate('/')}
-                        className="bg-gray-500 hover:bg-gray-600 text-white font-medium px-4 py-2 rounded"
-                    >
+                    <ButtonWidget onClick={() => navigate('/')} className="bg-gray-500 hover:bg-gray-600 text-white font-medium px-4 py-2 rounded">
                         Back
-                    </button>
-                    <button
-                        type="submit"
-                        className="bg-blue-500 hover:bg-blue-600 text-white font-medium px-4 py-2 rounded"
-                    >
+                    </ButtonWidget>
+                    <ButtonWidget type="submit" className="bg-blue-500 hover:bg-blue-600 text-white font-medium px-4 py-2 rounded">
                         Submit
-                    </button>
+                    </ButtonWidget>
                 </div>
             </form>
         </div>

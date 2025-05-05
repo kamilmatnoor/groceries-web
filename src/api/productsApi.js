@@ -13,28 +13,58 @@ const productsMock = {
 export default productsMock;
 
 export async function addProduct(product) {
-    const response = await http.post(`/products`, product);
-    return response.data.data;
+    let result;
+    try {
+        const response = await http.post(`/products`, product);
+        result = { products: response.data.data, error: response.data.error };
+    } catch (error) {
+        result = { products: {}, error: true };
+    }
+    return result;
 }
 
 export async function getProducts(options) {
-    const response = await http.get('/products', {
-        params: options,
-    });
-    return { products: response.data.data, totals: response.data.totals };
+    let result;
+    try {
+        const response = await http.get('/products', {
+            params: options,
+        });
+        result = { products: response.data.data, totals: response.data.totals, error: response.data.error };
+    } catch (error) {
+        result = { products: [], totals: 0, error: true };
+    }
+    return result;
 }
 
 export async function getProductById(id) {
-    const response = await http.get(`/products/${id}`);
-    return response.data.data;
+    let result;
+    try {
+        const response = await http.get(`/products/${id}`);
+        result = { products: response.data.data, error: response.data.error };
+    } catch (error) {
+        result = { products: {}, error: true };
+    }
+    return result;
 }
 
 export async function updateProduct(id, product) {
-    const response = await http.put(`/products/${id}`, product);
-    return response.data.data;
+    let result;
+    try {
+        const response = await http.put(`/products/${id}`, product);
+        result = { products: response.data.data, error: response.data.error };
+    } catch (error) {
+        result = { products: {}, error: true };
+    }
+    return result;
 }
 
 export async function deleteProduct(id) {
-    const response = await http.delete(`/products/${id}`);
-    return response.data.data;
+    let result;
+    try {
+        const response = await http.delete(`/products/${id}`);
+        result = { products: response.data.data, error: response.data.error };
+    } catch (error) {
+        result = { products: {}, error: true };
+    }
+    return result;
 }
