@@ -50,36 +50,10 @@ const EditProductPage = () => {
 
     return (
         <div style={{ padding: '20px' }}>
-            <h2 class="text-4xl font-extrabold dark:text-white mb-4">Edit Product</h2>
+            <h2 className="text-4xl font-extrabold dark:text-white mb-4">Edit Product</h2>
             <form onSubmit={onSubmitBtnClicked} className="space-y-4">
                 <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">UPC12 Barcode:</label>
-                    <input
-                        name="product_barcode"
-                        value={product.product_barcode}
-                        onChange={onInputFieldChanged}
-                        className="w-full max-w-xs border border-gray-300 rounded-lg p-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                    />
-                    {errors.product_barcode && (
-                        <div className="text-red-500 text-xs mt-1">{errors.product_barcode}</div>
-                    )}
-                </div>
-
-                <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Product Brand:</label>
-                    <input
-                        name="product_brand"
-                        value={product.product_brand}
-                        onChange={onInputFieldChanged}
-                        className="w-full max-w-xs border border-gray-300 rounded-lg p-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                    />
-                    {errors.product_brand && (
-                        <div className="text-red-500 text-xs mt-1">{errors.product_brand}</div>
-                    )}
-                </div>
-
-                <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Product Name:</label>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Name</label>
                     <input
                         name="product_name"
                         value={product.product_name}
@@ -92,7 +66,33 @@ const EditProductPage = () => {
                 </div>
 
                 <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Product Description:</label>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Brand</label>
+                    <input
+                        name="product_brand"
+                        value={product.product_brand}
+                        onChange={onInputFieldChanged}
+                        className="w-full max-w-xs border border-gray-300 rounded-lg p-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                    />
+                    {errors.product_brand && (
+                        <div className="text-red-500 text-xs mt-1">{errors.product_brand}</div>
+                    )}
+                </div>
+
+                <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Barcode</label>
+                    <input
+                        name="product_barcode"
+                        value={product.product_barcode}
+                        onChange={onInputFieldChanged}
+                        className="w-full max-w-xs border border-gray-300 rounded-lg p-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                    />
+                    {errors.product_barcode && (
+                        <div className="text-red-500 text-xs mt-1">{errors.product_barcode}</div>
+                    )}
+                </div>
+
+                <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Description</label>
                     <input
                         name="product_description"
                         value={product.product_description}
