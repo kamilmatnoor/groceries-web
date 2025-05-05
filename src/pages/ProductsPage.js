@@ -6,7 +6,7 @@ import { getProducts, deleteProduct } from "../api/productsApi";
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
-import image from '../assets/images/image-1.jpg';
+import imageDefault from '../assets/images/image-default.jpg';
 
 import { ButtonWidget } from '../widgets/ButtonWidget';
 import { SelectWidget } from '../widgets/SelectWidget';
@@ -164,7 +164,7 @@ const ProductsPage = () => {
         {products.map((product, index) => (
           <div key={index} className="max-w-64 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
             <a href="#">
-              <img className="rounded-t-lg w-full" src={image} alt="{product.name}" />
+              <img className="rounded-t-lg w-full" src={imageDefault} alt="{product.name}" />
             </a>
             <div className="p-5">
               <p className="text-sm font-thin text-gray-700 dark:text-gray-400">Product</p>
