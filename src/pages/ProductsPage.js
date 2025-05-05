@@ -141,7 +141,7 @@ const ProductsPage = () => {
           onChange={(e) => onSortChanged(e.target.value, sortOrder)}
           options={[
             { value: 'product_brand', label: 'Brand' },
-            { value: 'product_name', label: 'Name' }
+            { value: 'product_name', label: 'Product Name' }
           ]}
         />
 
@@ -194,7 +194,7 @@ const ProductsPage = () => {
               <div key={index} className="max-w-64 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
                 <img className="rounded-t-lg w-full" src={imageDefault} alt="{product.name}" />
                 <div className="p-5">
-                  <p className="text-sm font-thin text-gray-700 dark:text-gray-400">Product</p>
+                  <p className="text-sm font-thin text-gray-700 dark:text-gray-400">Product Name</p>
                   <p className="mb-2 text-sm text-gray-800 dark:text-gray-400">{product.product_name}</p>
 
                   <p className="text-sm font-thin text-gray-700 dark:text-gray-400">Brand</p>
