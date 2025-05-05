@@ -2,17 +2,23 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Prerequisites
+
+Please run backend before proceed. You may visit this [repo](https://github.com/kamilmatnoor/groceries-api) to start.
+
 ## Available Scripts
 
-In the project directory, you can run:
+In the project directory, you may follow this:
 
-#### `git clone https://github.com/kamilmatnoor/groceries-web.git`
-#### `cd groceries-web`
-#### `npm install`
-#### `npm start`
+#### Steps
+* `git clone https://github.com/kamilmatnoor/groceries-web.git`
+* `cd groceries-web`
+* `npm install`
+* `npm start`
 
 Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Check the console to know you running port
+You may access the app through your browser by given url eg. `http://localhost:3000`
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
