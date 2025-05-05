@@ -78,14 +78,14 @@ const ProductsPage = () => {
   return (
     <div style={{ padding: '20px' }}>
       <h2>Products</h2>
-      <div className="flex flex-col sm:flex-row w-full mb-4 gap-2 items-center">
+      <div className="flex flex-col w-full mb-4 gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex flex-wrap gap-2 w-full sm:w-auto items-center">
           <input
             type="text"
             placeholder="Search by Product Name or Brand"
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white w-full sm:w-auto"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white w-full sm:w-[300px]"
           />
 
           <button
@@ -103,37 +103,63 @@ const ProductsPage = () => {
           </button>
         </div>
 
-        <div className="sm:ml-auto w-full sm:w-auto">
-          <button
-            onClick={() => navigate('/add')}
-            className="flex items-center gap-1 bg-green-500 hover:bg-green-600 text-white font-medium px-4 py-2.5 rounded w-full sm:w-auto"
-          >
-            Add
-          </button>
-        </div>
+        <button
+          onClick={() => navigate('/add')}
+          className="flex items-center gap-1 bg-green-500 hover:bg-green-600 text-white font-medium px-4 py-2.5 rounded w-full sm:w-auto sm:ml-auto"
+        >
+          Add
+        </button>
       </div>
-      <div>
-        <label>Sort by: </label>
-        <select onChange={(e) => onSortChanged(e.target.value, sortOrder)} value={sortField}>
+
+      <div className="flex flex-wrap gap-2 w-full sm:w-auto items-center">
+        <label className="text-sm font-medium text-gray-900 dark:text-white">Sort by:</label>
+        <select
+          onChange={(e) => onSortChanged(e.target.value, sortOrder)}
+          value={sortField}
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+        >
           <option value="product_brand">Brand</option>
           <option value="product_name">Name</option>
         </select>
-        <select onChange={(e) => onSortChanged(sortField, e.target.value)} value={sortOrder}>
+
+        <select
+          onChange={(e) => onSortChanged(sortField, e.target.value)}
+          value={sortOrder}
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+        >
           <option value="asc">Asc</option>
           <option value="desc">Desc</option>
         </select>
-        <label style={{ marginLeft: '20px' }}>Page Size: </label>
-        <select value={itemsPerPage} onChange={onPageSizeChanged}>
+
+        <label className="ml-4 text-sm font-medium text-gray-900 dark:text-white">Page Size:</label>
+        <select
+          value={itemsPerPage}
+          onChange={onPageSizeChanged}
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+        >
           <option value={10}>10</option>
           <option value={20}>20</option>
           <option value={50}>50</option>
         </select>
-        <button onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))} disabled={currentPage === 1}>
-          Previous
+
+        <button
+          onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
+          disabled={currentPage === 1}
+          className="ml-4 bg-gray-300 hover:bg-gray-400 text-gray-800 font-medium px-3 py-2 rounded disabled:opacity-50"
+        >
+          &lt; Previous
         </button>
-        <span style={{ margin: '0 10px' }}>Page {currentPage} of {totalPages}</span>
-        <button onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))} disabled={currentPage === totalPages}>
-          Next
+
+        <span className="mx-2 text-sm text-gray-900 dark:text-white">
+          Page {currentPage} of {totalPages}
+        </span>
+
+        <button
+          onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
+          disabled={currentPage === totalPages}
+          className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-medium px-3 py-2 rounded disabled:opacity-50"
+        >
+          Next &gt;
         </button>
       </div>
       <ul>
